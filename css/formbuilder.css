@@ -1,0 +1,74 @@
+﻿
+@charset "UTF-8";
+* { padding: 0; margin: 0; font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: normal; }
+ul, li { list-style: none; }
+
+.fb { width: 1024px; height: 600px; margin: 0 auto; overflow: hidden; }
+
+/*工具箱*/
+.fb-toolbar { width: 1005px; height: 25px; line-height: 25px; border: 1px solid #ccc; padding: 0 5px; margin: 5px 0; }
+
+/*工具箱*/
+.fb-toolbox { float: left; width: 200px; height: 540px; border: 1px solid #ccc; margin: 0 5px 0 0; }
+.fb-toolbox .title { width: 190px; height: 30px; line-height: 30px; padding: 0 5px; border-bottom: 1px solid #ccc; background-color: rgba(102, 175, 233, 0.6); }
+.fb-toolbox ul { }
+.fb-toolbox ul li { width: 184px; height: 30px; line-height: 30px; padding: 0 8px; border-bottom: 1px solid #ddd; /*box-shadow: 0 0 1px 0 inset; cursor: move;*/ }
+
+/*设计器窗体*/
+.fb-designer { float: left; width: 600px; height: 540px; border: 1px solid #ccc; background-color: rgba(220, 220, 220, 0.6); }
+.fb-designer .title { width: 590px; height: 30px; line-height: 30px; padding: 0 5px; border-bottom: 1px solid #ccc; background-color: rgba(102, 175, 233, 0.6); }
+.fb-designer ul { /*width: 594px; height: 442px; border: 1px dashed #ccc;*/ margin: 2px 4px; }
+.fb-designer ul li { background-color: #fff; margin: 2px 0; padding: 8px 5px; }
+.fb-designer ul li:hover { -webkit-transition: box-shadow 250ms; transition: box-shadow 250ms; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.8); }
+.fb-designer ul .empty { height: 30px; border: 1px dashed #ccc; display: none; }
+.fb-designer ul .selected { -webkit-transition: box-shadow 250ms; transition: box-shadow 250ms; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.8); }
+.fb-designer ul .selected .controlbox { position: absolute; top: -8px; right: 2px; display: block; }
+.fb-designer ul .selected .controlbox span { padding: 1px 3px; margin-right: 2px; background-color: rgba(255, 0, 0, 0.4); color: #fff; }
+.fb-designer ul .selected .controlbox span:hover { background-color: rgba(255, 0, 0, 0.8); cursor: default; }
+
+/*.fb-designer ul li A,
+.fb-designer ul li img,
+.fb-designer ul li input,
+.fb-designer ul li input[type='button'],
+.fb-designer ul li input[type='checkbox'],
+.fb-designer ul li input[type='date'],
+.fb-designer ul li input[type='file'],
+.fb-designer ul li input[type='hidden'],
+.fb-designer ul li input[type='radio'],
+.fb-designer ul li input[type='text'],
+.fb-designer ul li label,
+.fb-designer ul li select,
+.fb-designer ul li textarea { font-family: inherit; font-size: inherit; line-height: inherit; }*/
+
+.fb-designer ul li div { position: relative; width: auto; height: 100%; }
+.fb-designer ul li div label { width: 130px; text-align: right; vertical-align: top; padding-right: 5px; display: inline-block; }
+.fb-designer ul li div .control { text-align: left; display: inline-block; }
+.fb-designer ul li div .control .option { margin-bottom: 5px; }
+.fb-designer ul li div .control .option input { vertical-align: middle; }
+.fb-designer ul li div .required { color: #ff0000; vertical-align: top; }
+.fb-designer ul li div .controlbox { display: none; }
+/*.fb-designer ul li div .controlbox span { padding: 1px 3px; margin-right: 2px; background-color: rgba(102, 175, 233, 0.4); }
+.fb-designer ul li div .controlbox span:hover { background-color: rgba(102, 175, 233, 0.8); cursor: default; }*/
+
+.controlTemp { position: absolute; opacity: 0.5; filter: alpha(opacity=50); }
+.controlTemp div { position: relative; width: auto; height: 100%; }
+.controlTemp div label { width: auto; text-align: right; vertical-align: top; padding-right: 5px; display: inline-block; }
+.controlTemp div .controlbox { position: absolute; top: -4px; right: 2px; display: none; }
+.controlTemp div .controlbox span { padding: 1px 3px; margin-right: 2px; }
+.controlTemp div .controlbox span:hover { background-color: rgba(102, 175, 233, 0.6); cursor: default; }
+
+/*属性窗体*/
+.fb-property { position: relative; float: left; width: 200px; height: 540px; border: 1px solid #ccc; margin: 0 0 0 5px; }
+.fb-property .title { width: 190px; height: 30px; line-height: 30px; padding: 0 5px; border-bottom: 1px solid #ccc; background-color: rgba(102, 175, 233, 0.6); }
+.fb-property ul { }
+.fb-property ul li { min-height: 26px; /*line-height: 30px;*/ padding: 0 8px; padding-top: 6px; border-bottom: 1px solid #ddd; }
+.fb-property ul li label { width: 48px; padding-right: 2px; /*border-right: 1px solid #ddd;*/ margin-top: 2px; margin-right: 2px; /*text-align: right;*/ vertical-align: top; display: inline-block; }
+.fb-property ul li input[type='checkbox'] { margin-left: 2px; vertical-align: middle; }
+.fb-property ul li input[type='text'] { width: 126px; }
+.fb-property ul li .prop { width: 130px; display: inline-block; }
+.fb-property ul li .prop div { margin-bottom: 5px; }
+.fb-property ul li .prop .op-text { width: 95px; vertical-align: middle; }
+.fb-property ul li .prop .op-value { width: 20px; vertical-align: middle; }
+.fb-property ul li .prop .op-remove { cursor: pointer; }
+.fb-property ul li .op-add { cursor: pointer; }
+.fb-property .property-op { position: absolute; width: 100%; bottom: 0px; text-align: center; padding: 5px; }

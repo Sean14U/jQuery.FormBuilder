@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>jQuery.FormBuilder</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/formbuilder.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/formrender.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
+</head>
+
+<body>
+    <div class="content">
+        <div class="build-wrap">
+            <div class="fb">
+                <div class="fb-toolbar">
+                    <span>jQuery.FormBuilder</span>
+                    <input type="button" id="btn_clear" value="清除" />
+                    <input type="button" id="btn_save" value="保存" />
+                    <input type="button" id="btn_view" value="预览" />
+                </div>
+                <div class="fb-toolbox">
+                    <p class="title">控件</p>
+                    <ul>
+                        <li data-ctrl="h"><span><i></i><span>Heading</span></span></li>
+                        <!--<li data-ctrl="button"><span><i></i><span>Button</span></span></li>-->
+                        <li data-ctrl="checkbox"><span><i></i><span>CheckBox</span></span></li>
+                        <li data-ctrl="checkboxgroup"><span><i></i><span>CheckBox Group</span></span></li>
+                        <li data-ctrl="color"><span><i></i><span>Color</span></span></li>
+                        <li data-ctrl="datetime-local"><span><i></i><span>Date</span></span></li>
+                        <li data-ctrl="month"><span><i></i><span>Month</span></span></li>
+                        <li data-ctrl="week"><span><i></i><span>Week</span></span></li>
+                        <li data-ctrl="time"><span><i></i><span>Time</span></span></li>
+                        <li data-ctrl="email"><span><i></i><span>Email</span></span></li>
+                        <li data-ctrl="number"><span><i></i><span>Number</span></span></li>
+                        <li data-ctrl="tel"><span><i></i><span>Tel</span></span></li>
+                        <!--<li data-ctrl="file"><span><i></i><span>File Upload</span></span></li>
+                        <li data-ctrl="hidden"><span><i></i><span>Hidden Field</span></span></li>
+                        <li data-ctrl="img"><span><i></i><span>Image</span></span></li>-->
+                        <!--<li data-ctrl="label"><span><i></i><span>Label</span></span></li>-->
+                        <!--<li data-ctrl="radio"><span><i></i><span>Radio</span></span></li>-->
+                        <li data-ctrl="radiogroup"><span><i></i><span>Radio Group</span></span></li>
+                        <li data-ctrl="select"><span><i></i><span>Select</span></span></li>
+                        <li data-ctrl="textarea"><span><i></i><span>TextArea</span></span></li>
+                        <li data-ctrl="text"><span><i></i><span>TextBox</span></span></li>
+                    </ul>
+                </div>
+                <div class="fb-designer">
+                    <p class="title">窗体</p>
+                    <ul></ul>
+                </div>
+                <div class="fb-property">
+                    <p class="title">属性</p>
+                    <ul>
+                        <li><label>ID</label><input id="txt_prop_id" type="text" readonly="true" style="background-color:#ddd" value="" /></li>
+                        <li><label>Text</label><input id="txt_prop_name" type="text" value="" /></li>
+                    </ul>
+                    <!--<div class="property-op">
+                        <input id="btn_PropSave" type="button" value="应 用" />
+                        <input id="btn_PropReset" type="button" value="重 置" />
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="render-wrap">
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/extension.js"></script>
+    <script src="js/formbuilder.js"></script>
+    <script src="js/formrender.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

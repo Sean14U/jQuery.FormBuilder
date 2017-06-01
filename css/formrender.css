@@ -1,0 +1,15 @@
+﻿@charset "UTF-8";
+* { padding: 0; margin: 0; font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: normal; }
+ul, li { list-style: none; }
+
+.form-render { width: 600px; height: auto; border: 1px solid #ccc; background-color: #fff; margin: 0 auto; }
+.form-render .title { position: relative; /*width: 590px;*/ height: 30px; line-height: 30px; padding: 0 5px; border-bottom: 1px solid #ccc; background-color: rgba(102, 175, 233, 0.6); }
+.form-render .title .controlbox { position: absolute; top: 0; right: 2px; display: block; }
+.form-render .title .controlbox span { padding: 1px 3px; margin-right: 2px; background-color: rgba(255, 0, 0, 0.4); color: #fff; }
+.form-render .title .controlbox span:hover { background-color: rgba(255, 0, 0, 0.8); cursor: default; }
+.form-render ul li { background-color: #fff; margin: 2px 0; padding: 5px; }
+.form-render ul li label { width: 130px; text-align: right; vertical-align: top; padding-right: 5px; display: inline-block; }
+.form-render ul li .required { color: #ff0000; vertical-align: top; }
+.form-render ul li .control { text-align: left; display: inline-block; }
+.form-render ul li .control .option { margin-bottom: 5px; }
+.form-render ul li .control .option input { vertical-align: middle; }
