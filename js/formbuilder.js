@@ -108,16 +108,16 @@
                     "filter": "alpha(opacity=100)"
                 });
 
-				//var target = event.srcElement ? event.srcElement : event.target;
-				//var target = event.relatedTarget || event.toElement;
+                //var target = event.srcElement ? event.srcElement : event.target;
+                //var target = event.relatedTarget || event.toElement;
 
-				var designer = $('.fb-designer')[0];
-                var p_event = { x: event.clientX, y: event.clientY};//光标坐标
+                var designer = $('.fb-designer')[0];
+                var p_event = { x: event.clientX, y: event.clientY };//光标坐标
                 var p_designer = { x: designer.offsetLeft, y: designer.offsetTop, w: designer.offsetWidth, h: designer.offsetHeight };//设计器坐标
 
                 //鼠标位置在设计器中
                 //if ($('.fb-designer')[0].contains(target)) {
-				if(p_event.x > p_designer.x && p_event.x < (p_designer.x + p_designer.w) && p_event.y > p_designer.y && p_event.y < (p_designer.y + p_designer.h)){
+                if (p_event.x > p_designer.x && p_event.x < (p_designer.x + p_designer.w) && p_event.y > p_designer.y && p_event.y < (p_designer.y + p_designer.h)) {
                     var controlItem = $("<li></li>").append(createControl(tag));
                     $(".fb-designer ul").append(controlItem);//向设计器中添加控件
                     $(controlItem).trigger("click");
@@ -402,42 +402,48 @@
         });
 
         /************公共函数************/
-		
-		//展现预设布局
+
+        //展现预设布局
         formBuilder.show = function (formData) {
-			var formJson = JSON.parse(formData);
-			$(".fb-designer p").prop("id", formJson.id);
-				
-			var controls = formJson.contains;
-			for (var i = 0; i < controls.length; i++) {
-				
-				var tag = controls[i].tag;
-				var controlData = {
-					id : controls[i].id,
-					type : controls[i].type,
-					required : controls[i].required,
-					label : controls[i].label,
-					content : controls[i].content,
-					text : controls[i].text,
-					options : controls[i].options
-				};
 
-				var item = document.createElement('li');//控件
-				var div = document.createElement('div');//控件外框
-				if(controlData.label != undefined){
-					div.appendChild(createLabel(controlData.label));
-				}
-				div.appendChild(createTag(tag, controlData));
-				item.appendChild(createItem(div));
+            if (formData != null && formData != "") {
+                var formJson = JSON.parse(formData);
+                $(".fb-designer p").prop("id", formJson.id);
 
-				$(".fb-designer ul").append(item);
-			}
-		}
+                var controls = formJson.contains;
+                for (var i = 0; i < controls.length; i++) {
+
+                    var tag = controls[i].tag;
+                    var controlData = {
+                        id: controls[i].id,
+                        type: controls[i].type,
+                        required: controls[i].required,
+                        label: controls[i].label,
+                        content: controls[i].content,
+                        text: controls[i].text,
+                        options: controls[i].options
+                    };
+
+                    var item = document.createElement('li');//控件
+                    var div = document.createElement('div');//控件外框
+                    if (controlData.label != undefined) {
+                        var lbl = controlData.required != undefined ? $(createLabel(controlData.label)).append("<span class='required'>*</span>") : createLabel(controlData.label);
+                        $(div).append(lbl);
+                    }
+                    $(div).append(createTag(tag, controlData));
+                    $(item).append(createItem(div));
+
+                    $(".fb-designer ul").append(item);
+                }
+            }
+        }
 
         //保存设计布局
         formBuilder.save = function () {
+
             var $control, control, ctrlLabel;//控件jQuery对象，控件对象
             var contains = [];//控件子对象
+
             $(".fb-designer ul>li").each(function () {
 
                 $control = $(this).find(":nth-child(2)");
@@ -450,10 +456,10 @@
                 control = {};
                 control.id = $control.prop("id");
                 control.tag = $control[0].tagName;
-                control.type = $control.prop("type");
+                control.type = typeof $control.prop("type") == 'undefined' ? $control.attr("type") : $control.prop("type");
                 control.required = $control.attr("required");
                 //control.name = 
-                //control.value = 
+                //control.value =  
                 control.label = ctrlLabel;
                 control.content = $control.html();
                 control.text = $control.text();
@@ -469,11 +475,11 @@
             form.contains = contains;//窗体包含的控件
 
             var formData = JSON.stringify(form);
-            var ctrlJson = JSON.stringify(form);
+            //var ctrlJson = JSON.stringify(form);
             //window.sessionStorage.setItem('formData', ctrlJson);
-            console.log(ctrlJson);
+            console.log(formData);
 
-            return ctrlJson;
+            return formData;
         }
 
         //清除设计布局
@@ -506,44 +512,44 @@
             var timestamp = new Date().getTime();
             var ctrlLabel, ctrlValue, inputType, ctrlGroup = false;
 
-			var tag, ctrlData = {};
+            var tag, ctrlData = {};
 
             switch (type) {
                 /*单标签*/
                 case 'button': tag = "input"; ctrlData.type = type; ctrlData.value = "Button";
                     break;
-                case 'checkbox': tag = "input"; ctrlData.type = type; ctrlData.label = "CheckBox"; 
+                case 'checkbox': tag = "input"; ctrlData.type = type; ctrlData.label = "CheckBox";
                     break;
-                case 'datetime-local': tag = "input"; ctrlData.type = type; ctrlData.label = "DateTime"; 
+                case 'datetime-local': tag = "input"; ctrlData.type = type; ctrlData.label = "DateTime";
                     break;
-                case 'color': tag = "input"; ctrlData.type = type; ctrlData.label = "Color"; 
+                case 'color': tag = "input"; ctrlData.type = type; ctrlData.label = "Color";
                     break;
-                case 'month': tag = "input"; ctrlData.type = type; ctrlData.label = "Month"; 
+                case 'month': tag = "input"; ctrlData.type = type; ctrlData.label = "Month";
                     break;
-                case 'week': tag = "input"; ctrlData.type = type; tag = "input"; ctrlData.label = "Week"; 
+                case 'week': tag = "input"; ctrlData.type = type; tag = "input"; ctrlData.label = "Week";
                     break;
-                case 'time': tag = "input"; ctrlData.type = type; ctrlData.label = "Time"; 
+                case 'time': tag = "input"; ctrlData.type = type; ctrlData.label = "Time";
                     break;
-                case 'email': tag = "input"; ctrlData.type = type; ctrlData.label = "Email"; 
+                case 'email': tag = "input"; ctrlData.type = type; ctrlData.label = "Email";
                     break;
-                case 'tel': tag = "input"; ctrlData.type = type; ctrlData.label = "Tel"; 
+                case 'tel': tag = "input"; ctrlData.type = type; ctrlData.label = "Tel";
                     break;
-                case 'number': tag = "input"; ctrlData.type = type; ctrlData.label = "Number"; 
+                case 'number': tag = "input"; ctrlData.type = type; ctrlData.label = "Number";
                     break;
-                case 'file': tag = "input"; ctrlData.type = type; ctrlData.label = "FileUpload"; 
+                case 'file': tag = "input"; ctrlData.type = type; ctrlData.label = "FileUpload";
                     break;
-                case 'hidden': tag = "input"; ctrlData.type = type; 
+                case 'hidden': tag = "input"; ctrlData.type = type;
                     break;
                 case 'img': tag = type; //TODO
                     break;
-                case 'radio': tag = "input"; ctrlData.type = type; ctrlData.label = "Radio"; 
+                case 'radio': tag = "input"; ctrlData.type = type; ctrlData.label = "Radio";
                     break;
-                case 'text': tag = "input"; ctrlData.type = type; ctrlData.label = "TextBox"; 
+                case 'text': tag = "input"; ctrlData.type = type; ctrlData.label = "TextBox";
                     break;
                     /*双标签*/
                 case 'a': tag = type; //TODO
                     break;
-                case 'h': tag = type; ctrlData.content = "H"; 
+                case 'h': tag = type; ctrlData.content = "H";
                     break;
                 case 'label': tag = type; //TODO
                     break;
@@ -559,118 +565,73 @@
                     break;
             }
 
-			ctrlData.id = tag + '-' + timestamp;
+            ctrlData.id = tag + '-' + timestamp;
 
             var div = document.createElement('div');//控件外框
-            //var ctrlBox = document.createElement('div');//控制框(关闭/编辑按钮)
-            //var btnClose = document.createElement('span');//关闭按钮
-            //var btnProp = document.createElement('span');//编辑按钮
 
             if (ctrlData.label != undefined) {
-                div.appendChild(createLabel(ctrlData.label));
+                $(div).append(createLabel(ctrlData.label));
             }
 
-            div.appendChild(createTag(tag, ctrlData));
+            $(div).append(createTag(tag, ctrlData));
 
-//            if (ctrlGroup) {
-//                div.appendChild(createInputGroup(tag, ctrlData, 3));
-//            }
-//            else if (tag == "select") {
-//                div.appendChild(createSelect(tag, ctrlData.label, 3));
-//            }
-//            else if (tag == "input") {
-//                div.appendChild(createTag(tag, ctrlData));
-//            }
-//            else {
-//                div.appendChild(createTag(tag, ctrlData));
-//                //div.appendChild(createTag(tag));
-//            }
-
-//            btnProp.className = 'prop';
-//            btnProp.innerHTML = 'E';
-//            ctrlBox.appendChild(btnProp);
-
-//            btnClose.className = 'close';
-//            btnClose.innerHTML = 'X';
-//            ctrlBox.appendChild(btnClose);
-//
-//            ctrlBox.className = 'controlbox';
-//
-//            div.appendChild(ctrlBox);
-//            div.className = 'controlItem';
-
-			var item = createItem(div);
+            var item = createItem(div);
 
             return item;
         }
-		
-		//列表项
-		function createItem(div){
-		
-			//var item = document.createElement('li');//控件
-            //var div = document.createElement('div');//控件外框
+
+        //列表项
+        function createItem(div) {
+
             var ctrlBox = document.createElement('div');//控制框(关闭/编辑按钮)
             var btnClose = document.createElement('span');//关闭按钮
+            //var btnProp = document.createElement('span');//编辑按钮
 
-            btnClose.className = 'close';
-            btnClose.innerHTML = 'X';
-            ctrlBox.appendChild(btnClose);
-            ctrlBox.className = 'controlbox';
+            $(btnClose).html('X');
+            $(btnClose).addClass('close');
 
-            div.appendChild(ctrlBox);
-            div.className = 'controlItem';
-			
-			//div.appendChild(field);
-			
-			//item.appendChild(div);
-			
-			return div;
-		}
+            $(ctrlBox).append(btnClose);
+            $(ctrlBox).addClass('controlbox');
+
+            $(div).append(ctrlBox);
+            $(div).addClass('controlItem');
+
+            return div;
+        }
 
         //标签
         function createTag(tag) {
 
-//            var timestamp = new Date().getTime();
-//            var element = document.createElement(tag);//控件标签
-//
-//            element.id = tag + "-" + timestamp;
-//            element.setAttribute("id", element.id);
-//            //element.name = '';
-//            element.textContent = tag.toUpperCase();
-//            //element.title = '';
-//
-//            return element;
+            var attrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';//content
+            //var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-			var attrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';//content
-			//var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+            var element;
 
-			var element;
+            if (tag.toUpperCase() == "CHECKBOXGROUP" || tag.toUpperCase() == "RADIOGROUP" || tag.toUpperCase() == "DIV") {
+                tag = "input";
+                element = createInputGroup(tag, attrs);
+            }
+            else if (tag.toUpperCase() == "SELECT") {//.toLowerCase()
+                element = createSelect(tag, attrs);
+            }
+            else {
+                element = document.createElement(tag);
 
-			if (tag == "checkboxgroup" || tag == "radiogroup") {
-				tag = "input";
-				element = createInputGroup(tag, attrs, 3);
-			}
-			else if (tag == "select") {
-				element = createSelect(tag, attrs, 3);
-			}
-			else{
-				element = document.createElement(tag);
-				
-				for (var attr in attrs) {
-					if (attr == "label") {
-						element.setAttribute("data-label", attrs[attr]);
-					}
-					else if (attr == "content") {
-						element.innerHTML = attrs[attr];//innerText
-					}
-					else if (attrs.hasOwnProperty(attr) && typeof attrs[attr] != 'undefined') {
-						element.setAttribute(attr, attrs[attr]);
-					}
-					else{ }
-				}
-			}
+                for (var attr in attrs) {
+                    if (attr == "label") {
+                        $(element).attr("data-label", attrs[attr]);
+                    }
+                    else if (attr == "content") {
+                        $(element).html(attrs[attr]);//innerText
+                    }
+                    else if (attrs.hasOwnProperty(attr) && typeof attrs[attr] != 'undefined') { //
+                        $(element).attr(attr, attrs[attr]);
+                    }
+                    else { }
+                }
+            }
 
-			return element;
+            return element;
         }
 
         //创建input
@@ -686,7 +647,7 @@
             element.type = ctrlData.type;
 
             if (ctrlData.label != undefined) {
-                element.setAttribute("data-label", ctrlData.label);
+                $(element).attr("data-label", ctrlData.label);
             }
 
             if (ctrlData.value != undefined) {
@@ -697,32 +658,39 @@
         }
 
         //创建CheckBoxGroup/RadioGroup
-        function createInputGroup(tag, ctrlData, opcount) {
+        function createInputGroup(tag, ctrlData) {
 
             var timestamp = new Date().getTime();
             var element = document.createElement("div");//控件标签
 
-            element.id = tag + "-" + timestamp;
-            element.name = element.id;
-            //element.title = '';
-            element.className = "control";
-            element.setAttribute("type", ctrlData.type);
+            $(element).prop("id", ctrlData.id ? ctrlData.id : tag + "-" + timestamp);
+            $(element).prop("name", element.id);
+            $(element).addClass("control");
+            $(element).attr("type", ctrlData.type);
+            $(element).attr("required", ctrlData.required);
 
-            var option, options = [];
-            var lbl, ctrl, br;
-            for (var i = 0; i < opcount; i++) {
+            if (typeof ctrlData.options == 'undefined') {//default
+                ctrlData.options = "[{\"type\":\"" + ctrlData.type + "\",\"name\":\"option-" + ctrlData.type + "group-1495681323989\",\"text\":\"" + ctrlData.type + " 0\",\"checked\":false,\"value\":false}"
+                                + ",{\"type\":\"" + ctrlData.type + "\",\"name\":\"option-" + ctrlData.type + "group-1495681323989\",\"text\":\"" + ctrlData.type + " 1\",\"checked\":false,\"value\":false}"
+                                + ",{\"type\":\"" + ctrlData.type + "\",\"name\":\"option-" + ctrlData.type + "group-1495681323989\",\"text\":\"" + ctrlData.type + " 2\",\"checked\":false,\"value\":false}]";
+            }
+            var options = JSON.parse(ctrlData.options);
+            var option;//, options = [];
+            var lbl, ctrl;
+            for (var i = 0; i < options.length; i++) {
 
                 box = document.createElement("div");
                 lbl = document.createElement("span");
 
                 option = {};
-                option.type = ctrlData.type;
-                option.name = "option-" + element.id;
-                option.text = ctrlData.type + ' ' + i;
-                option.checked = false;
-                option.value = false;
+                option.type = options[i].type;
+                option.name = options[i].name;
+                option.text = options[i].text;
+                option.checked = options[i].checked;
+                option.value = options[i].value;
 
                 lbl.innerHTML = option.text;
+
                 ctrl = document.createElement(tag);
                 ctrl.type = ctrlData.type;
                 ctrl.name = ctrlData.type + "-" + element.name;
@@ -732,50 +700,56 @@
                 box.className = "option";
                 box.appendChild(ctrl);
                 box.appendChild(lbl);
-                element.appendChild(box);
 
-                options.push(option);
+                $(element).append(box);
+
+                //options.push(option);
             }
 
             var dataOptions = JSON.stringify(options);
-            element.setAttribute("data-options", dataOptions);
+            $(element).attr("data-options", dataOptions);
 
             if (ctrlData.label != undefined) {
-                element.setAttribute("data-label", ctrlData.label);
+                $(element).attr("data-label", ctrlData.label);
             }
 
             return element;
         }
 
         //创建Select
-        function createSelect(tag, ctrlData, opcount) {
+        function createSelect(tag, ctrlData) {
             var timestamp = new Date().getTime();
             var element = document.createElement(tag);//控件标签
 
-            element.id = tag + "-" + timestamp;
+            //element.id = tag + "-" + timestamp;
             //element.name = '';
             //element.title = '';
-            //element.className = ctrlType;
+            $(element).prop("id", ctrlData.id ? ctrlData.id : tag + "-" + timestamp);
+            $(element).attr("required", ctrlData.required);
 
-            var op, option, options = [];
-            for (var i = 0; i < opcount; i++) {
+            if (typeof ctrlData.options == 'undefined') {//default
+                ctrlData.options = "[{\"type\":\"radio\",\"name\":\"option-select-1495684000286\",\"text\":\"Option 0\",\"checked\":false,\"value\":0},{\"type\":\"radio\",\"name\":\"option-select-1495684000286\",\"text\":\"Option 1\",\"checked\":false,\"value\":1},{\"type\":\"radio\",\"name\":\"option-select-1495684000286\",\"text\":\"Option 2\",\"checked\":false,\"value\":2}]";
+            }
+            var options = JSON.parse(ctrlData.options);
+            var op, option;//, options = [];
+            for (var i = 0; i < options.length; i++) {
 
                 option = {};
-                option.type = "radio";
-                option.name = "option-" + element.id;
-                option.text = 'Option ' + i;
-                option.checked = false;
-                option.value = i;
+                option.type = options[i].type;
+                option.name = options[i].name;
+                option.text = options[i].text;
+                option.checked = options[i].checked;
+                option.value = options[i].value;
 
                 op = new Option(option.text, option.value);
                 op.className = "option";
                 element.options.add(op);
-                options.push(option);
+                //options.push(option);
             }
 
             var dataOptions = JSON.stringify(options);
-            element.setAttribute("data-options", dataOptions);
-            element.setAttribute("data-label", ctrlData.label);
+            $(element).attr("data-options", dataOptions);
+            $(element).attr("data-label", ctrlData.label);
 
             return element;
         }
@@ -784,8 +758,8 @@
         function createLabel(text, forName) {
 
             var element = document.createElement('label');
-            element.innerHTML = text;
-            //element.setAttribute("for", forName);
+            $(element).html(text);
+            //$(element).attr("for", forName);
 
             return element;
         }
@@ -808,7 +782,7 @@
 
             $(".fb-property ul li").remove();
 
-            var eleRequired = $("#" + id).prop("required");
+            var eleRequired = $("#" + id).attr("required");
             //var eleName = $("#" + id).prop("name");
             var eleLabel = $("#" + id).attr("data-label");
             var eleValue = $("#" + id).val();
@@ -817,7 +791,7 @@
 
             $(".fb-property ul").append('<li><label>ID</label><input id="txt_prop_id" type="text" readonly="true" style="background-color:#ddd" value="' + id + '" /></li>');
 
-            if (eleRequired == true) { eleRequired = "checked"; }
+            if (eleRequired) { eleRequired = "checked"; }
             $(".fb-property ul").append('<li><label>Required</label><input id="txt_prop_required" type="checkbox" ' + eleRequired + ' /></li>');
 
             //$(".fb-property ul").append('<li><label>Name</label><input id="txt_prop_name" type="text" value="' + eleName + '" /></li>');
