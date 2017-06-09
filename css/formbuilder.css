@@ -13,6 +13,7 @@ ul, li { list-style: none; }
 .fb-toolbox .title { width: 190px; height: 30px; line-height: 30px; padding: 0 5px; border-bottom: 1px solid #ccc; background-color: rgba(102, 175, 233, 0.6); }
 .fb-toolbox ul { }
 .fb-toolbox ul li { width: 184px; height: 30px; line-height: 30px; padding: 0 8px; border-bottom: 1px solid #ddd; /*box-shadow: 0 0 1px 0 inset; cursor: move;*/ }
+.fb-toolbox ul li i{ margin-right: 5px;}
 
 /*设计器窗体*/
 .fb-designer { float: left; width: 600px; height: 540px; border: 1px solid #ccc; background-color: rgba(220, 220, 220, 0.6); }
