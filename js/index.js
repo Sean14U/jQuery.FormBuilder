@@ -6,13 +6,13 @@ $(document).ready(function ($) {
 
     var formBuilder = $('.build-wrap').formBuilder(fbOptions);
 
-	//var data = "{\"id\":\"form-1495012859441\",\"name\":\"Form\",\"text\":\"窗体\",\"contains\":[{\"id\":\"h-1495012880580\",\"tag\":\"H\",\"content\":\"H\"},{\"id\":\"input-1495012883226\",\"tag\":\"INPUT\",\"type\":\"text\",\"text\":\"input\",\"label\":\"TextBox\"}]}";
-	//var data = "{\"id\":\"form-1495596570856\",\"name\":\"Form\",\"text\":\"窗体\",\"contains\":[{\"id\":\"h-1495596610901\",\"tag\":\"H\",\"content\":\"请假单\",\"text\":\"请假单\"},{\"id\":\"input-1495596612904\",\"tag\":\"INPUT\",\"type\":\"text\",\"content\":\"\",\"text\":\"\",\"label\":\"姓名\"},{\"id\":\"input-1495602989423\",\"tag\":\"INPUT\",\"type\":\"text\",\"content\":\"\",\"text\":\"\",\"label\":\"部门\"},{\"id\":\"select-1495603164960\",\"tag\":\"SELECT\",\"type\":\"select-one\",\"content\":\"<option class=\"option\" value=\"0\">Option 0</option><option class=\"option\" value=\"1\">Option 1</option><option class=\"option\" value=\"2\">Option 2</option><div class=\"option\" name=\"1495603188391\"><input name=\"undefined-select-1495603164960\" type=\"undefined\"><span>产假</span></div><div class=\"option\" name=\"1495603192641\"><input name=\"undefined-select-1495603164960\" type=\"undefined\"><span>调休</span></div>\",\"text\":\"Option 0Option 1Option 2产假调休Option 1产假调休\",\"label\":\"Select\",\"options\":\"[{\"type\":\"radio\",\"name\":\"\",\"text\":\"事假\",\"checked\":false,\"value\":0},{\"type\":\"radio\",\"name\":\"\",\"text\":\"病假\",\"checked\":false,\"value\":1},{\"type\":\"radio\",\"name\":\"\",\"text\":\"年假\",\"checked\":false,\"value\":2},{\"type\":\"radio\",\"name\":\"\",\"text\":\"产假\",\"checked\":false,\"value\":3},{\"type\":\"radio\",\"name\":\"\",\"text\":\"调休\",\"checked\":false,\"value\":4}]\"},{\"id\":\"textarea-1495602964825\",\"tag\":\"TEXTAREA\",\"type\":\"textarea\",\"content\":\"\",\"text\":\"\",\"label\":\"备注\"}]}";
+	//示例设计布局
+	//var data = "{\"id\":\"form-1498123510489\",\"name\":\"Form\",\"text\":\"窗体\",\"contains\":[{\"id\":\"h-1498123553127\",\"tag\":\"H\",\"content\":\"请假条\",\"text\":\"请假条\"},{\"id\":\"input-1498123631886\",\"tag\":\"INPUT\",\"type\":\"text\",\"label\":\"事由\",\"content\":\"\",\"text\":\"\"},{\"id\":\"input-1498123591539\",\"tag\":\"INPUT\",\"type\":\"datetime-local\",\"label\":\"开始时间\",\"content\":\"\",\"text\":\"\"},{\"id\":\"input-1498123608205\",\"tag\":\"INPUT\",\"type\":\"datetime-local\",\"label\":\"结束时间\",\"content\":\"\",\"text\":\"\"},{\"id\":\"input-1498123568929\",\"tag\":\"INPUT\",\"type\":\"checkbox\",\"label\":\"是否抄送人事\",\"content\":\"\",\"text\":\"\"},{\"id\":\"textarea-1498123643304\",\"tag\":\"TEXTAREA\",\"type\":\"textarea\",\"label\":\"备注\",\"content\":\"\",\"text\":\"\"}]}";
 	//formBuilder.data('formBuilder').show(data);
 
     $("#btn_view").click(function () {
 
-        var formData = formBuilder.data('formBuilder').save();//window.sessionStorage.getItem('formData');
+        var formData = formBuilder.data('formBuilder').save();
         var frOptions = {
             dataType: 'json',
             formData: formData,

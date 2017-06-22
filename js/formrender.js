@@ -9,9 +9,9 @@ var FormRender = function FormRender(options, element) {
 
     var defaults = {
         //container: false,
-        dataType: 'json',
-        formData: false,
-        showTitle: false
+        dataType: 'json', //表单数据类型
+        formData: false, //是否包含呈现表单的数据
+        showTitle: false //是否显示标题
     };
 
     var opts = $.extend(true, defaults, options);
@@ -108,12 +108,12 @@ function renderControl(controlData) {
         var opItem, options = JSON.parse(controlData.options);
         for (var i = 0; i < options.length; i++) {
             opItem = document.createElement('div');
-            v = document.createElement('input');
+            v = document.createElement('input'); //子项控件
             v.type = options[i].type;
             v.checked = options[i].checked;
             v.name = options[i].type + "-" + control.id;
 
-            t = document.createElement('span');
+            t = document.createElement('span'); //子项文本
             t.innerText = options[i].text;
 
             opItem.appendChild(v);
@@ -134,7 +134,7 @@ function renderSelectControl(controlData) {
     control.type = controlData.type;
 
     var options = JSON.parse(controlData.options);
-    var op;
+    var op; //选择控件的选项
     for (var i = 0; i < options.length; i++) {
         op = new Option(options[i].text, options[i].value);
         if (options[i].checked) { op.selected = "selected"; }
@@ -156,13 +156,13 @@ function renderOption(optionData) {
     element.className = "control";
 
     for (var i = 0; i < options.length; i++) {
-        opItem = document.createElement('div');
+        opItem = document.createElement('div'); //子项控件
         v = document.createElement('input');
         v.type = options[i].type;
         v.checked = options[i].checked;
         v.name = options[i].type + "-" + timestamp;
 
-        t = document.createElement('span');
+        t = document.createElement('span'); //子项文本
         t.innerText = options[i].text;
 
         opItem.appendChild(v);
@@ -194,43 +194,3 @@ function renderRequired() {
 
     return element;
 }
-
-function markup(tag) {
-    var content = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var contentType = void 0,
-        field = document.createElement(tag),
-        getContentType = function getContentType(content) {
-            return Array.isArray(content) ? 'array' : typeof content === 'undefined' ? 'undefined' : _typeof(content);
-        },
-        appendContent = {
-            string: function string(content) {
-                field.innerHTML = content;
-            },
-            object: function object(content) {
-                return field.appendChild(content);
-            },
-            array: function array(content) {
-                for (var i = 0; i < content.length; i++) {
-                    contentType = getContentType(content[i]);
-                    appendContent[contentType](content[i]);
-                }
-            }
-        };
-
-    for (var attr in attrs) {
-        if (attrs.hasOwnProperty(attr)) {
-            var name = fbUtils.safeAttrName(attr);
-            field.setAttribute(name, attrs[attr]);
-        }
-    }
-
-    contentType = getContentType(content);
-
-    if (content) {
-        appendContent[contentType].call(this, content);
-    }
-
-    return field;
-};
